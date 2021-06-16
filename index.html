@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>todo</title>
+    <meta charset="UTF-8"/>
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container"></div>
+    <div id="container2">
+        <div class="todo">
+            <button type="button" id="todo">+</button>
+        </div>
+        <button class="open-button" onclick="openForm()">+</button>
+        <div class="form-popup" id="myForm">
+            <form class="form-container">
+              <h1>Login</h1>
+          
+              <label for="email"><b>Email</b></label>
+              <input type="text" placeholder="Enter Email" name="email">
+          
+              <label for="psw"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="psw">
+          
+              <button type="submit" class="btn">Login</button>
+              <button type="button" class="btn cancel" id="cancel">Close</button>
+            </form>
+          </div>
+    </div>
+</body>
+</html>
