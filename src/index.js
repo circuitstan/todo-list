@@ -4,14 +4,19 @@ const newTodo = () => {
     let newTodoDiv = document.createElement('div')
     let todo = document.createElement('textarea')
     let enter = document.createElement('input')
+    let cancel = document.createElement('input')
     newTodoDiv.className = "todo"
     enter.className = "enter"
     todo.className = "input"
+    cancel.className = "cancel"
     todo.type = "text"
     enter.type = "submit"
-    enter.value = "Add todo"
+    enter.value = "Add todo event"
+    cancel.type = "button"
+    cancel.value = "Cancel"
     newTodoDiv.appendChild(todo)
     newTodoDiv.appendChild(enter)
+    newTodoDiv.appendChild(cancel)
     container.appendChild(newTodoDiv)
     enter.onclick = () => {
         newTodoDiv.style.display = "none"
@@ -19,6 +24,12 @@ const newTodo = () => {
         card.className = "card"
         card.textContent = todo.value
         container.appendChild(card)
+        todoBtn.style.display = "block"
+
+    }
+
+    cancel.onclick = () => {
+        container.removeChild(newTodoDiv)
         todoBtn.style.display = "block"
 
     }
