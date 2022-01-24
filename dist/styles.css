@@ -1,55 +1,56 @@
 body {
-    background-color: rgba(209, 236, 255, 0.747);
-    font-size: 16px;
+  background-color: rgba(209, 236, 255, 0.747);
+  font-size: 16px;
 }
 
 #container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px;
-    height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  height: max-content;
 
 }
+
 
 #container2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
 }
 
-#todo {
-    width: 200px;
-    height: 50px;
-    background-color: rgb(241, 241, 241);
-    border-radius: 5px;
-    border: 0;
-    font-size: 3vw;
-    color: rgb(136, 135, 135);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-    justify-content: center;
+#newtodobtn {
+  width: 200px;
+  height: 50px;
+  background-color: rgb(241, 241, 241);
+  border-radius: 5px;
+  border: 0;
+  font-size: 3vw;
+  color: rgb(136, 135, 135);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  justify-content: center;
 
 }
 
-#todo:hover {
-    background-color: rgb(218, 218, 218);
-    cursor: pointer;
+#newtodobtn:hover {
+  background-color: rgb(218, 218, 218);
+  cursor: pointer;
 }
 
 /*#plus {
-    font-size: 3vw;
-    height: 38px;
-    display: flex;
-    position: absolute;
-    align-items: center;
-    padding: 0 0 5px 5px;
-    color: rgb(136, 135, 135);
+  font-size: 3vw;
+  height: 38px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  padding: 0 0 5px 5px;
+  color: rgb(136, 135, 135);
 }*/
 
 .enter {
@@ -57,48 +58,71 @@ body {
 }
 
 .todo {
-    display: flex;
-    flex-direction: column;
-    height: 120px;
-    align-items: center;
-    justify-content: left;
-    width: 200px;
+  display: flex;
+  flex-direction: column;
+  height: 120px;
+  align-items: center;
+  justify-content: left;
+  width: 200px;
+}
+
+.carddiv {
+  display: flex;
+  flex-direction: row;
+
 }
 
 .card {
-    display: flex;
-    justify-content: left;    
-    align-items: center;
-    width: 188px;
-    min-height: 40px;
-    max-height: max-content;
-    padding-left: 10px;
-    border: solid black 1px;
-    border-radius: 5px;
-    word-break: break-all;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  width: 188px;
+  min-height: 40px;
+  max-height: max-content;
+  padding-left: 10px;
+  border: 2px solid rgb(63, 140, 255);
+  border-radius: 5px;
+  word-break: break-all;
+  resize: none;
+  margin-bottom: 8px;
+  margin-right: 2px;
+  background-color: rgb(240, 240, 240);
+  outline: none;
+}
 
+.card:focus {
+  background-color: white;
+}
 
+.done {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
 }
 
 .input {
-    border: 2px solid rgb(63, 140, 255);
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.747);
-    display: flex;
-    text-align:left;
-    vertical-align: top;
-    outline: none;
-    width: 200px;
-    min-height: 40px;
-    max-height: max-content;
-    resize: none;
-    margin-bottom: 2px;
+  border: 2px solid rgb(63, 140, 255);
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.747);
+  display: flex;
+  text-align:left;
+  vertical-align: top;
+  outline: none;
+  width: 200px;
+  min-height: 40px;
+  max-height: max-content;
+  resize: none;
+  margin-bottom: 2px;
 
 }
 
 * {
-    box-sizing: 
-    border-box;
+  box-sizing: border-box;
 }
 
 /* Button used to open the contact form - fixed at the bottom of the page */
