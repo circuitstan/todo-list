@@ -42,6 +42,7 @@ const newTodo = () => {
             todoBtn.style.display = "block"
         }
     })
+
     
 
     enter.onclick = () => {
