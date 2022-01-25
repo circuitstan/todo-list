@@ -35,6 +35,7 @@ body {
   align-items: center;
   padding: 0;
   justify-content: center;
+  margin-top: 4px;
 
 }
 
@@ -43,32 +44,25 @@ body {
   cursor: pointer;
 }
 
-/*#plus {
-  font-size: 3vw;
-  height: 38px;
-  display: flex;
-  position: absolute;
-  align-items: center;
-  padding: 0 0 5px 5px;
-  color: rgb(136, 135, 135);
-}*/
 
 .enter {
-  margin-bottom: 2px;
+  margin-right: 2px;
+  height: 22px;
 }
 
-.todo {
-  display: flex;
-  flex-direction: column;
-  height: 120px;
-  align-items: center;
-  justify-content: left;
-  width: 200px;
+.cancel {
+  height: 22px;
 }
 
-.carddiv {
+.enter-and-cancel {
+  font-size: 10px;
+}
+
+
+.card-div {
   display: flex;
   flex-direction: row;
+  align-items: center;
 
 }
 
@@ -77,36 +71,51 @@ body {
   justify-content: left;
   align-items: center;
   flex-direction: row;
-  width: 188px;
-  min-height: 40px;
+  width: 200px;
+  min-height: 50px;
   max-height: max-content;
   padding-left: 10px;
-  border: 2px solid rgb(63, 140, 255);
+  border: 2px solid rgba(108, 194, 255, 0.76);
   border-radius: 5px;
   word-break: break-all;
   resize: none;
-  margin-bottom: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
   margin-right: 2px;
   background-color: rgb(240, 240, 240);
   outline: none;
+  font-size: 16px;
 }
 
 .card:focus {
   background-color: white;
 }
 
-.done {
+.done-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 20px;
+  font-size: 22px;
+  background-color: transparent;
+  border: none;
+  margin-left: 5px;
+}
+
+.done-btn:hover {
+  background-color: rgba(108, 194, 255, 0.397);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.done-todo {
+  text-decoration: line-through;
 }
 
 .input {
-  border: 2px solid rgb(63, 140, 255);
+  border: 2px solid rgba(108, 194, 255, 0.76);
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.747);
   display: flex;
@@ -114,11 +123,21 @@ body {
   vertical-align: top;
   outline: none;
   width: 200px;
-  min-height: 40px;
+  min-height: 50px;
   max-height: max-content;
   resize: none;
   margin-bottom: 2px;
+  font-size: 16px;
 
+}
+
+.todo {
+  display: flex;
+  flex-direction: column;
+  height: 120px;
+  align-items: left;
+  justify-content: left;
+  width: 245px;
 }
 
 * {
