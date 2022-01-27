@@ -28,7 +28,6 @@ const newTodo = () => {
     newTodoDiv.appendChild(input)
     newTodoDiv.appendChild(buttons)
     column1.appendChild(newTodoDiv)
-    console.log("hey")
 
     input.focus()
     input.addEventListener("keypress", (e) => {
@@ -120,7 +119,7 @@ function doneAndDelete(e) {
                 cards[i].className = "card done-todo"
                 doneButtons[i].textContent = "x"
             } else if (doneButtons[i].textContent == "x") {
-                container.removeChild(div[i])
+                column1.removeChild(div[i])
             }
         }
     }
@@ -182,20 +181,14 @@ else {
     console.log("Error: localStorage not working")
 }
 
-/*//Clear previous unwanted data
-
-if (count <= -1) {
-    localStorage.clear()
-}*/
-
 
 //Test for previous data
 
 if(!localStorage.getItem('cards')) {
-    console.log("empty")
+    console.log("storage empty")
     populateStorage();
 } else {
-    console.log("reload")
+    console.log("load complete")
     setStyles();
 }
 
@@ -207,7 +200,6 @@ function setStyles() {
     var currentCards = localStorage.getItem('cards'); 
     document.getElementById('to-do-column').innerHTML = currentCards;
     count = Number(currentCount)
-    console.log(count)
 }
 
 
