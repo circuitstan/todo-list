@@ -7,11 +7,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="container"></div>
+    <div class=titlebar>
+        <p class="title">To-do</p>
+        <p class="title">In progress</p>
+        <p class="title">Done</p>
+    </div>
+    <div id="container">
+        <div id="to-do-column"></div>
+        <div id="doing-column"></div>
+        <div id="done-column"></div>
+    </div>
     <div id="container2">
-        <div class="todo">
+        <div class="to-do">
             <button type="button" id="newtodobtn">+</button>
         </div>
+        <div class="placeholder"></div>
+        <div class="placeholder"></div>
         <button class="open-button" onclick="openForm()">+</button>
         <div class="form-popup" id="myForm">
             <form class="form-container">

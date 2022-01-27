@@ -1,4 +1,5 @@
 const container = document.getElementById('container')
+const column1 = document.getElementById('to-do-column')
 
 
 //Add new to-do
@@ -12,7 +13,7 @@ const newTodo = () => {
     let buttons = document.createElement('div')
     let enter = document.createElement('input')
     let cancel = document.createElement('input')
-    newTodoDiv.className = "todo"
+    newTodoDiv.className = "to-do"
     buttons.className = "enter-and-cancel"
     enter.className = "enter"
     input.className = "input"
@@ -26,12 +27,12 @@ const newTodo = () => {
     buttons.appendChild(cancel)
     newTodoDiv.appendChild(input)
     newTodoDiv.appendChild(buttons)
-    container.appendChild(newTodoDiv)
+    column1.appendChild(newTodoDiv)
 
     input.focus()
     input.addEventListener("keypress", (e) => {
         if (e.key == "Enter") {
-            newTodoDiv.style.display = "none"
+            column1.removeChild(newTodoDiv)
             let newCardDiv = document.createElement('div')
             let card = document.createElement('textarea')
             let done = document.createElement('button')
@@ -47,12 +48,13 @@ const newTodo = () => {
             card.spellcheck = false
             newCardDiv.appendChild(card)
             newCardDiv.appendChild(done)
-            container.appendChild(newCardDiv)
+            column1.appendChild(newCardDiv)
             todoBtn.style.display = "block"
+            populateStorage()
         }
     })
     enter.onclick = () => {
-        newTodoDiv.style.display = "none"
+        column1.removeChild(newTodoDiv)
         let newCardDiv = document.createElement('div')
         let card = document.createElement('textarea')
         let done = document.createElement('button')
@@ -68,12 +70,13 @@ const newTodo = () => {
         card.spellcheck = false
         newCardDiv.appendChild(card)
         newCardDiv.appendChild(done)
-        container.appendChild(newCardDiv)
+        column1.appendChild(newCardDiv)
         todoBtn.style.display = "block"
+        populateStorage()
 
     }
     cancel.onclick = () => {
-        container.removeChild(newTodoDiv)
+        column1.removeChild(newTodoDiv)
         todoBtn.style.display = "block"
 
     }
@@ -125,6 +128,7 @@ function doneAndDelete(e) {
 container.addEventListener("click", (e) => {
     if (e.target.className == "done-btn") {
         doneAndDelete(e)
+        populateStorage()
     }
 })
 
@@ -142,3 +146,71 @@ closeBtn.addEventListener("click", () => {
     popupForm.style.display = "none"
 })
 
+/*
+//Check localStorage availability
+
+function storageAvailable(type) {
+    var storage;
+    try {
+        storage = window[type];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+
+if (storageAvailable('localStorage')) {
+    console.log("localStorage works")
+}
+else {
+    console.log("Error: localStorage not working")
+}
+
+
+//Test for previous data
+
+if(!localStorage.getItem('cards')) {
+    populateStorage();
+} else {
+    setStyles();
+}
+
+
+//Get saved data
+
+function setStyles() {
+    var currentCount = localStorage.getItem('count')
+    var currentCards = localStorage.getItem('cards'); 
+    document.getElementById('container').innerHTML = currentCards;
+    count = currentCount
+}
+
+
+//Set data
+
+function populateStorage() {
+    localStorage.setItem('cards', document.getElementById('container').innerHTML);
+    localStorage.setItem('count', count)
+    setStyles();
+}
+
+document.addEventListener("click", (e) => {
+    console.log(e)
+})
+
+*/
