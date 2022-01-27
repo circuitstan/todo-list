@@ -28,6 +28,7 @@ const newTodo = () => {
     newTodoDiv.appendChild(input)
     newTodoDiv.appendChild(buttons)
     column1.appendChild(newTodoDiv)
+    console.log("hey")
 
     input.focus()
     input.addEventListener("keypress", (e) => {
@@ -146,7 +147,7 @@ closeBtn.addEventListener("click", () => {
     popupForm.style.display = "none"
 })
 
-/*
+
 //Check localStorage availability
 
 function storageAvailable(type) {
@@ -181,12 +182,20 @@ else {
     console.log("Error: localStorage not working")
 }
 
+/*//Clear previous unwanted data
+
+if (count <= -1) {
+    localStorage.clear()
+}*/
+
 
 //Test for previous data
 
 if(!localStorage.getItem('cards')) {
+    console.log("empty")
     populateStorage();
 } else {
+    console.log("reload")
     setStyles();
 }
 
@@ -196,21 +205,16 @@ if(!localStorage.getItem('cards')) {
 function setStyles() {
     var currentCount = localStorage.getItem('count')
     var currentCards = localStorage.getItem('cards'); 
-    document.getElementById('container').innerHTML = currentCards;
-    count = currentCount
+    document.getElementById('to-do-column').innerHTML = currentCards;
+    count = Number(currentCount)
+    console.log(count)
 }
 
 
 //Set data
 
 function populateStorage() {
-    localStorage.setItem('cards', document.getElementById('container').innerHTML);
+    localStorage.setItem('cards', document.getElementById('to-do-column').innerHTML);
     localStorage.setItem('count', count)
     setStyles();
 }
-
-document.addEventListener("click", (e) => {
-    console.log(e)
-})
-
-*/
