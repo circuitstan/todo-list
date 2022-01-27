@@ -1,6 +1,9 @@
 const container = document.getElementById('container')
 const column1 = document.getElementById('to-do-column')
+const column2 = document.getElementById('doing-column')
+const column3 = document.getElementById('done-column')
 
+//todo: add id-s to newcarddiv
 
 //Add new to-do
 
@@ -40,7 +43,7 @@ const newTodo = () => {
             done.className = "done-btn"
             card.className = "card"
             done.type = "button"
-            done.textContent = "🗸"
+            done.textContent = ">"
             card.textContent = input.value
             done.id = count
             card.id = count
@@ -62,7 +65,7 @@ const newTodo = () => {
         done.className = "done-btn"
         card.className = "card"
         done.type = "button"
-        done.textContent = "🗸"
+        done.textContent = ">"
         card.textContent = input.value
         done.id = count
         card.id = count
@@ -113,10 +116,14 @@ function doneAndDelete(e) {
     var doneButtons = document.getElementsByClassName('done-btn')
     var cards = document.getElementsByClassName('card')
     var div = document.getElementsByClassName('card-div')
+
     for (let i = 0; i < doneButtons.length; i++) {
         if (doneButtons[i].id == e.target.id) {
-            if (doneButtons[i].textContent == "🗸") {
-                cards[i].className = "card done-todo"
+            if (doneButtons[i].textContent == ">") {
+                cards[i].className = "card in-progress"
+                doneButtons[i].textContent = "🗸"
+            } else if (doneButtons[i].textContent == "🗸") {
+                cards[i].className = "card done-to-do"
                 doneButtons[i].textContent = "x"
             } else if (doneButtons[i].textContent == "x") {
                 column1.removeChild(div[i])
@@ -131,6 +138,27 @@ container.addEventListener("click", (e) => {
         populateStorage()
     }
 })
+
+//Move to-do to "in progress"
+
+function inProgress(e) {
+    var doneButtons = document.getElementsByClassName('done-btn')
+    var cards = document.getElementsByClassName('card')
+    var div = document.getElementsByClassName('card-div')
+    for (let i = 0; i < doneButtons.length; i++) {
+        if (doneButtons[i].id == e.target.id) {
+            if (doneButtons[i].textContent == ">") {
+                cards[i].className = "card in-progress"
+                doneButtons[i].textContent = "🗸"
+            } else if (doneButtons[i].textContent == "🗸") {
+                cards[i].className = "card done-to-do"
+                doneButtons[i].textContent = "x"
+            } else if (doneButtons[i].textContent == "x") {
+                column1.removeChild(div[i])
+            }
+        }
+    }
+}
 
 
 //form bottom right
