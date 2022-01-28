@@ -6,8 +6,8 @@ body {
 #container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   margin-top: 30px;
   height: max-content;
 
@@ -34,10 +34,19 @@ body {
   font-family: 'Courier New', Courier, monospace;
 }
 
+.title-placeholder {
+  margin-right: 200px;
+  margin-left: 50px;
+  width: 250px;
+  padding: 5px;
+  /*border: 1px solid black;*/
+  border-radius: 8px;
+}
+
 .titlebar {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: 100px;
 }
 
@@ -52,15 +61,36 @@ body {
 
 .cancel {
   height: 22px;
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 3px;
+  border: 2px solid rgba(108, 194, 255, 0.76);
+  font-size: 15px;
+  background: rgb(245, 245, 245);
+}
+
+.cancel:hover {
+  background: rgb(255, 255, 255);
+  cursor: pointer;
 }
 
 .enter {
-  margin-right: 2px;
-  margin-left: 25px;
+  margin-right: 3px;
+  margin-left: 30px;
   height: 22px;
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 3px;
+  border: 2px solid rgba(108, 194, 255, 0.76);
+  font-size: 15px;
+  background: rgb(245, 245, 245);
+}
+
+.enter:hover {
+  background: rgb(255, 255, 255);
+  cursor: pointer;
 }
 
 .enter-and-cancel {
+  margin-top: 2px;
   font-size: 10px;
 }
 
@@ -134,11 +164,11 @@ body {
   vertical-align: top;
   outline: none;
   width: 200px;
-  min-height: 50px;
+  min-height: 80px;
   max-height: max-content;
   resize: none;
   margin-bottom: 2px;
-  margin-left: 25px;
+  margin-left: 20px;
   font-size: 16px;
 
 }
@@ -157,7 +187,7 @@ body {
   padding: 0;
   justify-content: center;
   margin-top: 4px;
-  margin-left: 25px;
+  margin-left: 20px;
 
 }
 
@@ -173,6 +203,18 @@ body {
   align-items: left;
   justify-content: left;
   width: 300px;
+  margin-left: 50px;
+  margin-right: 150px;
+  margin-top: -80px;
+}
+
+.to-do-input {
+  display: flex;
+  flex-direction: column;
+  height: 120px;
+  align-items: left;
+  justify-content: left;
+  width: 300px;
 }
 
 #to-do-column {
@@ -181,10 +223,12 @@ body {
 
 #doing-column {
   width: 300px;
+
 }
 
 #done-column {
   width: 300px;
+
 }
 
 
