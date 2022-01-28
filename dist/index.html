@@ -8,19 +8,20 @@
 </head>
 <body>
     <div class=titlebar>
+        <p class="title-placeholder"></p>
         <p class="title">To-do</p>
         <p class="title">In progress</p>
         <p class="title">Done</p>
     </div>
     <div id="container">
+        <div class="to-do" id="plusdiv">
+            <button type="button" id="newtodobtn">+</button>
+        </div>
         <div id="to-do-column"></div>
         <div id="doing-column"></div>
         <div id="done-column"></div>
     </div>
     <div id="container2">
-        <div class="to-do">
-            <button type="button" id="newtodobtn">+</button>
-        </div>
         <div class="placeholder"></div>
         <div class="placeholder"></div>
         <button class="open-button" onclick="openForm()">+</button>

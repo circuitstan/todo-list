@@ -2,8 +2,8 @@ const container = document.getElementById('container')
 const column1 = document.getElementById('to-do-column')
 const column2 = document.getElementById('doing-column')
 const column3 = document.getElementById('done-column')
+const plusTodo = document.getElementById('plusdiv')
 
-//todo: add id-s to newcarddiv
 
 //Add new to-do
 
@@ -16,26 +16,26 @@ const newTodo = () => {
     let buttons = document.createElement('div')
     let enter = document.createElement('input')
     let cancel = document.createElement('input')
-    newTodoDiv.className = "to-do"
+    newTodoDiv.className = "to-do-input"
     buttons.className = "enter-and-cancel"
     enter.className = "enter"
     input.className = "input"
     cancel.className = "cancel"
     input.type = "text"
     enter.type = "submit"
-    enter.value = "Add to-do"
+    enter.value = "Add"
     cancel.type = "button"
     cancel.value = "Cancel"
     buttons.appendChild(enter)
     buttons.appendChild(cancel)
     newTodoDiv.appendChild(input)
     newTodoDiv.appendChild(buttons)
-    column1.appendChild(newTodoDiv)
+    plusTodo.appendChild(newTodoDiv)
 
     input.focus()
     input.addEventListener("keypress", (e) => {
         if (e.key == "Enter") {
-            column1.removeChild(newTodoDiv)
+            plusTodo.removeChild(newTodoDiv)
             let newCardDiv = document.createElement('div')
             let card = document.createElement('textarea')
             let done = document.createElement('button')
@@ -47,17 +47,18 @@ const newTodo = () => {
             card.textContent = input.value
             done.id = count
             card.id = count
-            newCardDiv.id = "carddiv"
+            newCardDiv.id = count
             card.spellcheck = false
             newCardDiv.appendChild(card)
             newCardDiv.appendChild(done)
             column1.appendChild(newCardDiv)
             todoBtn.style.display = "block"
+
             populateStorage()
         }
     })
     enter.onclick = () => {
-        column1.removeChild(newTodoDiv)
+        plusTodo.removeChild(newTodoDiv)
         let newCardDiv = document.createElement('div')
         let card = document.createElement('textarea')
         let done = document.createElement('button')
@@ -69,17 +70,18 @@ const newTodo = () => {
         card.textContent = input.value
         done.id = count
         card.id = count
-        newCardDiv.id = "carddiv"
+        newCardDiv.id = count
         card.spellcheck = false
         newCardDiv.appendChild(card)
         newCardDiv.appendChild(done)
         column1.appendChild(newCardDiv)
         todoBtn.style.display = "block"
+
         populateStorage()
 
     }
     cancel.onclick = () => {
-        column1.removeChild(newTodoDiv)
+        plusTodo.removeChild(newTodoDiv)
         todoBtn.style.display = "block"
 
     }
@@ -92,6 +94,7 @@ const todoBtn = document.getElementById('newtodobtn')
 
 todoBtn.addEventListener("click", (e) => {
     todoBtn.style.display = "none"
+    console.log("hey")
     newTodo()
 })
 
@@ -110,56 +113,70 @@ container.addEventListener("keypress", (e) => {
 })
 
 
-//Mark to-do as done and remove to-do
+//Move to-dos to in progress-done-remove
 
-function doneAndDelete(e) {
+function moveTodo1(e) {
     var doneButtons = document.getElementsByClassName('done-btn')
     var cards = document.getElementsByClassName('card')
     var div = document.getElementsByClassName('card-div')
 
     for (let i = 0; i < doneButtons.length; i++) {
-        if (doneButtons[i].id == e.target.id) {
+        if (doneButtons[i].id === e.target.id) {
             if (doneButtons[i].textContent == ">") {
                 cards[i].className = "card in-progress"
                 doneButtons[i].textContent = "🗸"
-            } else if (doneButtons[i].textContent == "🗸") {
-                cards[i].className = "card done-to-do"
+                column2.appendChild(div[i])
+            }
+        }
+    }
+}
+
+function moveTodo2(e) {
+    var doneButtons = document.getElementsByClassName('done-btn')
+    var cards = document.getElementsByClassName('card')
+    var div = document.getElementsByClassName('card-div')
+
+    for (let i = 0; i < doneButtons.length; i++) {
+        if (doneButtons[i].id === e.target.id) {
+            if (doneButtons[i].textContent == "🗸") {
+                cards[i].className = "card done-todo"
                 doneButtons[i].textContent = "x"
-            } else if (doneButtons[i].textContent == "x") {
-                column1.removeChild(div[i])
+                column3.appendChild(div[i])
+            }
+        }
+    }
+}
+
+function moveTodo3(e) {
+    var doneButtons = document.getElementsByClassName('done-btn')
+    var cards = document.getElementsByClassName('card')
+    var div = document.getElementsByClassName('card-div')
+
+    for (let i = 0; i < doneButtons.length; i++) {
+        if (doneButtons[i].id === e.target.id) {
+            if (doneButtons[i].textContent == "x") {
+                column3.removeChild(div[i])
             }
         }
     }
 }
 
 container.addEventListener("click", (e) => {
-    if (e.target.className == "done-btn") {
-        doneAndDelete(e)
+    console.log(e)
+    if (e.target.parentElement.childNodes[0].className == "card") {
+        console.log("hey")
+        moveTodo1(e)
+        populateStorage()
+    } else if (e.target.parentElement.childNodes[0].className == "card in-progress") {
+        moveTodo2(e)
+        populateStorage()
+    } else if (e.target.parentElement.childNodes[0].className == "card done-todo") {
+        moveTodo3(e)
         populateStorage()
     }
 })
 
-//Move to-do to "in progress"
-
-function inProgress(e) {
-    var doneButtons = document.getElementsByClassName('done-btn')
-    var cards = document.getElementsByClassName('card')
-    var div = document.getElementsByClassName('card-div')
-    for (let i = 0; i < doneButtons.length; i++) {
-        if (doneButtons[i].id == e.target.id) {
-            if (doneButtons[i].textContent == ">") {
-                cards[i].className = "card in-progress"
-                doneButtons[i].textContent = "🗸"
-            } else if (doneButtons[i].textContent == "🗸") {
-                cards[i].className = "card done-to-do"
-                doneButtons[i].textContent = "x"
-            } else if (doneButtons[i].textContent == "x") {
-                column1.removeChild(div[i])
-            }
-        }
-    }
-}
-
+//target.parentElement.childNodes[0].className
 
 //form bottom right
 
@@ -212,21 +229,31 @@ else {
 
 //Test for previous data
 
-if(!localStorage.getItem('cards')) {
+if((!localStorage.getItem('cards1')) && (!localStorage.getItem('cards2')) && (!localStorage.getItem('cards3'))) {
     console.log("storage empty")
     populateStorage();
+
+    //localStorage.clear()
+
 } else {
     console.log("load complete")
-    setStyles();
-}
+    setStyles()
 
+    //localStorage.clear()
+}
 
 //Get saved data
 
 function setStyles() {
     var currentCount = localStorage.getItem('count')
-    var currentCards = localStorage.getItem('cards'); 
-    document.getElementById('to-do-column').innerHTML = currentCards;
+    var currentCards1 = localStorage.getItem('cards1')
+    var currentCards2 = localStorage.getItem('cards2')
+    var currentCards3 = localStorage.getItem('cards3')
+
+    document.getElementById('to-do-column').innerHTML = currentCards1
+    document.getElementById('doing-column').innerHTML = currentCards2
+    document.getElementById('done-column').innerHTML = currentCards3
+
     count = Number(currentCount)
 }
 
@@ -234,7 +261,10 @@ function setStyles() {
 //Set data
 
 function populateStorage() {
-    localStorage.setItem('cards', document.getElementById('to-do-column').innerHTML);
+    localStorage.setItem('cards1', document.getElementById('to-do-column').innerHTML)
+    localStorage.setItem('cards2', document.getElementById('doing-column').innerHTML);
+    localStorage.setItem('cards3', document.getElementById('done-column').innerHTML);
+
     localStorage.setItem('count', count)
     setStyles();
 }
