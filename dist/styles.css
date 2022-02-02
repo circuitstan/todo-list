@@ -23,42 +23,6 @@ body {
 
 }
 
-.title {
-  margin-right: 50px;
-  border: 2px solid rgba(108, 194, 255, 0.76);
-  border-radius: 8px;
-  width: 250px;
-  padding: 5px;
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.747);
-  font-family: 'Courier New', Courier, monospace;
-}
-
-.title-placeholder {
-  margin-right: 200px;
-  margin-left: 50px;
-  width: 250px;
-  padding: 5px;
-  /*border: 1px solid black;*/
-  border-radius: 8px;
-}
-
-.titlebar {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  margin-top: 100px;
-}
-
-.placeholder {
-  display: flex;
-  flex-direction: column;
-  height: 120px;
-  align-items: left;
-  justify-content: left;
-  width: 300px;
-}
-
 .cancel {
   height: 22px;
   font-family: 'Courier New', Courier, monospace;
@@ -122,10 +86,24 @@ body {
   background-color: rgb(240, 240, 240);
   outline: none;
   font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .card:focus {
   background-color: white;
+}
+
+.date {
+  height: 30px;
+  color: black;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+  margin-left: 20px;
+  margin-bottom: 15px;
+  width: 200px;
+  border: 2px solid rgba(108, 194, 255, 0.76);
+  border-radius: 4px;
+  color: rgb(114, 114, 114);
 }
 
 .done-btn {
@@ -155,7 +133,26 @@ body {
   text-decoration: underline;
 }
 
-.input {
+.input1 {
+  border: 2px solid rgba(108, 194, 255, 0.76);
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.747);
+  display: flex;
+  text-align:left;
+  vertical-align: top;
+  outline: none;
+  width: 200px;
+  min-height: 40px;
+  max-height: max-content;
+  resize: none;
+  margin-top: 0px;
+  margin-bottom: 2px;
+  margin-left: 20px;
+  font-size: 16px;
+
+}
+
+.input2 {
   border: 2px solid rgba(108, 194, 255, 0.76);
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.747);
@@ -167,6 +164,7 @@ body {
   min-height: 80px;
   max-height: max-content;
   resize: none;
+  margin-top: 0px;
   margin-bottom: 2px;
   margin-left: 20px;
   font-size: 16px;
@@ -196,10 +194,47 @@ body {
   cursor: pointer;
 }
 
-.to-do {
+
+.placeholder {
   display: flex;
   flex-direction: column;
   height: 120px;
+  align-items: left;
+  justify-content: left;
+  width: 300px;
+}
+
+.title {
+  margin-right: 50px;
+  border: 2px solid rgba(108, 194, 255, 0.76);
+  border-radius: 8px;
+  width: 250px;
+  padding: 5px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.747);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.title-placeholder {
+  margin-right: 200px;
+  margin-left: 50px;
+  width: 250px;
+  padding: 5px;
+  /*border: 1px solid black;*/
+  border-radius: 8px;
+}
+
+.titlebar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 100px;
+}
+
+.to-do {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
   align-items: left;
   justify-content: left;
   width: 300px;
@@ -211,10 +246,21 @@ body {
 .to-do-input {
   display: flex;
   flex-direction: column;
-  height: 120px;
+  height: 400px;
   align-items: left;
   justify-content: left;
   width: 300px;
+  border: 2px solid rgba(0, 0, 0, 0.185);
+  border-radius: 8px;
+  background: rgb(241, 241, 241);
+}
+
+.todo-title {
+  color: black;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+  margin-left: 25px;
+  margin-bottom: 5px;
 }
 
 #to-do-column {
@@ -236,7 +282,8 @@ body {
   box-sizing: border-box;
 }
 
-/* Button used to open the contact form - fixed at the bottom of the page */
+
+/* Button used to open the contact form - fixed at the bottom of the page 
 .open-button {
   background-color: #555;
   color: white;
@@ -249,6 +296,7 @@ body {
   right: 28px;
   width: 280px;
 }
+*/
 
 /* The popup form - hidden by default */
 .form-popup {

@@ -12,39 +12,61 @@ var count = -1
 const newTodo = () => {
     count += 1
     let newTodoDiv = document.createElement('div')
-    let input = document.createElement('textarea')
+    let title = document.createElement('p')
+    let input1 = document.createElement('textarea')
+    let info = document.createElement('p')
+    let input2 = document.createElement('textarea')
+    let date = document.createElement('p')
+    let dateInput = document.createElement('input')
     let buttons = document.createElement('div')
     let enter = document.createElement('input')
     let cancel = document.createElement('input')
     newTodoDiv.className = "to-do-input"
     buttons.className = "enter-and-cancel"
     enter.className = "enter"
-    input.className = "input"
+    input1.className = "input1"
+    input2.className = "input2"
     cancel.className = "cancel"
-    input.type = "text"
+    title.className = "todo-title"
+    info.className = "todo-title"
+    date.className = "todo-title"
+    dateInput.className = "date"
+    dateInput.type = "date"
+    input1.type = "text"
+    input2.type = "text"
     enter.type = "submit"
     enter.value = "Add"
     cancel.type = "button"
     cancel.value = "Cancel"
+    title.textContent = "Title"
+    info.textContent = "Description"
+    date.textContent = "Due date"
+    input2.placeholder = "Add more details.."
     buttons.appendChild(enter)
     buttons.appendChild(cancel)
-    newTodoDiv.appendChild(input)
+    newTodoDiv.appendChild(title)
+    newTodoDiv.appendChild(input1)
+    newTodoDiv.appendChild(info)
+    newTodoDiv.appendChild(input2)
+    newTodoDiv.appendChild(date)
+    newTodoDiv.appendChild(dateInput)
+
     newTodoDiv.appendChild(buttons)
     plusTodo.appendChild(newTodoDiv)
 
-    input.focus()
-    input.addEventListener("keypress", (e) => {
+    input1.focus()
+    input1.addEventListener("keypress", (e) => {
         if (e.key == "Enter") {
             plusTodo.removeChild(newTodoDiv)
             let newCardDiv = document.createElement('div')
-            let card = document.createElement('textarea')
+            let card = document.createElement('p')
             let done = document.createElement('button')
             newCardDiv.className = "card-div"
             done.className = "done-btn"
             card.className = "card"
             done.type = "button"
             done.textContent = ">"
-            card.textContent = input.value
+            card.textContent = input1.value
             done.id = count
             card.id = count
             newCardDiv.id = count
@@ -149,7 +171,6 @@ function moveTodo2(e) {
 
 function moveTodo3(e) {
     var doneButtons = document.getElementsByClassName('done-btn')
-    var cards = document.getElementsByClassName('card')
     var div = document.getElementsByClassName('card-div')
 
     for (let i = 0; i < doneButtons.length; i++) {
@@ -163,21 +184,22 @@ function moveTodo3(e) {
 
 container.addEventListener("click", (e) => {
     console.log(e)
-    if (e.target.parentElement.childNodes[0].className == "card") {
-        console.log("hey")
-        moveTodo1(e)
-        populateStorage()
-    } else if (e.target.parentElement.childNodes[0].className == "card in-progress") {
-        moveTodo2(e)
-        populateStorage()
-    } else if (e.target.parentElement.childNodes[0].className == "card done-todo") {
-        moveTodo3(e)
-        populateStorage()
+    if (e.target.className == "done-btn") {
+        if (e.target.parentElement.childNodes[0].className == "card") {
+            console.log("hey")
+            moveTodo1(e)
+            populateStorage()
+        } else if (e.target.parentElement.childNodes[0].className == "card in-progress") {
+            moveTodo2(e)
+            populateStorage()
+        } else if (e.target.parentElement.childNodes[0].className == "card done-todo") {
+            moveTodo3(e)
+            populateStorage()
+        }
     }
 })
 
-//target.parentElement.childNodes[0].className
-
+/*
 //form bottom right
 
 function openForm() {
@@ -190,7 +212,7 @@ const closeBtn = document.getElementById('cancel')
 closeBtn.addEventListener("click", () => {
     popupForm.style.display = "none"
 })
-
+*/
 
 //Check localStorage availability
 
