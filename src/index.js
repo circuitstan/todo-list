@@ -1,4 +1,5 @@
 const container = document.getElementById('container')
+const topLayer = document.getElementById('top-layer')
 const column1 = document.getElementById('to-do-column')
 const column2 = document.getElementById('doing-column')
 const column3 = document.getElementById('done-column')
@@ -82,14 +83,14 @@ const newTodo = () => {
     enter.onclick = () => {
         plusTodo.removeChild(newTodoDiv)
         let newCardDiv = document.createElement('div')
-        let card = document.createElement('textarea')
+        let card = document.createElement('p')
         let done = document.createElement('button')
         newCardDiv.className = "card-div"
         done.className = "done-btn"
         card.className = "card"
         done.type = "button"
         done.textContent = ">"
-        card.textContent = input.value
+        card.textContent = input1.value
         done.id = count
         card.id = count
         newCardDiv.id = count
@@ -183,10 +184,8 @@ function moveTodo3(e) {
 }
 
 container.addEventListener("click", (e) => {
-    console.log(e)
     if (e.target.className == "done-btn") {
         if (e.target.parentElement.childNodes[0].className == "card") {
-            console.log("hey")
             moveTodo1(e)
             populateStorage()
         } else if (e.target.parentElement.childNodes[0].className == "card in-progress") {
@@ -196,6 +195,67 @@ container.addEventListener("click", (e) => {
             moveTodo3(e)
             populateStorage()
         }
+    }
+})
+
+
+// move making big card divs up together with todo cards?
+
+// Create expandable card
+
+const expandCard = (e) => {
+    var bigCards = document.getElementsByClassName('big-card')
+    console.log("a")
+    if (bigCards.length == 0) {
+        let bigCardDiv = document.createElement('div')
+        let bigCard = document.createElement('div')
+        bigCardDiv.className = "big-div"
+        bigCard.className = "big-card"
+        bigCardDiv.appendChild(bigCard)
+        topLayer.appendChild(bigCardDiv)
+        bigCard.id = e.target.id
+    }
+
+    for (let i = 0; i < bigCards.length; i++) {
+        if (e.target.id === bigCards[i].id) {
+            bigCards[i].style.display = "block"
+            bigCards[i].onclick = (e) => {
+                closeCard(e)
+            }
+        }
+    }
+}
+
+
+// Open up card
+
+function openCard(e) {
+    var cards = document.getElementsByClassName('card')
+    for (let i = 0; i < cards.length; i++) {
+        if (cards[i].id === e.target.id) {
+            expandCard(e)
+        }
+    }
+}
+
+
+// Close card
+
+function closeCard(e) {
+    var bigCards = document.getElementsByClassName('big-card')
+    console.log("t")
+    for (let i = 0; i < bigCards.length; i++) {
+        if (bigCards[i].id === e.target.id) {
+            bigCards[i].style.display = "none"
+        }
+    }
+}
+
+
+container.addEventListener("click", (e) => {
+    console.log(e)
+    if (e.target.className == "card") {
+        openCard(e)
     }
 })
 
