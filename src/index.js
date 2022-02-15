@@ -1,14 +1,15 @@
 const container = document.getElementById('container')
-const topLayer = document.getElementById('top-layer')
 const column1 = document.getElementById('to-do-column')
 const column2 = document.getElementById('doing-column')
 const column3 = document.getElementById('done-column')
 const plusTodo = document.getElementById('plusdiv')
+const bigCardDiv = document.getElementById('big-div')
 
+var count = -1
+var expandStatus = ""
 
 //Add new to-do
 
-var count = -1
 
 const newTodo = () => {
     count += 1
@@ -51,9 +52,14 @@ const newTodo = () => {
     newTodoDiv.appendChild(input2)
     newTodoDiv.appendChild(date)
     newTodoDiv.appendChild(dateInput)
-
     newTodoDiv.appendChild(buttons)
     plusTodo.appendChild(newTodoDiv)
+
+    let bigCard = document.createElement('div')
+    bigCard.className = "big-card"
+    bigCardDiv.appendChild(bigCard)
+    bigCard.id = count
+    bigCard.style.display = "none"
 
     input1.focus()
     input1.addEventListener("keypress", (e) => {
@@ -199,41 +205,20 @@ container.addEventListener("click", (e) => {
 })
 
 
-// move making big card divs up together with todo cards?
-
-// Create expandable card
-
-const expandCard = (e) => {
-    var bigCards = document.getElementsByClassName('big-card')
-    console.log("a")
-    if (bigCards.length == 0) {
-        let bigCardDiv = document.createElement('div')
-        let bigCard = document.createElement('div')
-        bigCardDiv.className = "big-div"
-        bigCard.className = "big-card"
-        bigCardDiv.appendChild(bigCard)
-        topLayer.appendChild(bigCardDiv)
-        bigCard.id = e.target.id
-    }
-
-    for (let i = 0; i < bigCards.length; i++) {
-        if (e.target.id === bigCards[i].id) {
-            bigCards[i].style.display = "block"
-            bigCards[i].onclick = (e) => {
-                closeCard(e)
-            }
-        }
-    }
-}
-
-
-// Open up card
+// Open up expandable card
 
 function openCard(e) {
     var cards = document.getElementsByClassName('card')
+    var bigCards = document.getElementsByClassName('big-card')
+
+    if (expandStatus == "open") {
+        return
+    }
+
     for (let i = 0; i < cards.length; i++) {
         if (cards[i].id === e.target.id) {
-            expandCard(e)
+            bigCards[i].style.display = "block"
+            expandStatus = "open"
         }
     }
 }
@@ -241,23 +226,26 @@ function openCard(e) {
 
 // Close card
 
-function closeCard(e) {
+function closeCard() {
     var bigCards = document.getElementsByClassName('big-card')
-    console.log("t")
     for (let i = 0; i < bigCards.length; i++) {
-        if (bigCards[i].id === e.target.id) {
-            bigCards[i].style.display = "none"
-        }
+        bigCards[i].style.display = "none"
+        expandStatus = "closed"
+        
     }
 }
 
 
-container.addEventListener("click", (e) => {
+document.addEventListener("click", (e) => {
     console.log(e)
-    if (e.target.className == "card") {
+    if (e.target.className != "big-card") {
+        closeCard()
+    }
+    if ((e.target.className == "card") || (e.target.className == "card in-progress") || (e.target.className == "card done-todo")) {
         openCard(e)
     }
 })
+
 
 /*
 //form bottom right
@@ -324,21 +312,6 @@ if((!localStorage.getItem('cards1')) && (!localStorage.getItem('cards2')) && (!l
     //localStorage.clear()
 }
 
-//Get saved data
-
-function setStyles() {
-    var currentCount = localStorage.getItem('count')
-    var currentCards1 = localStorage.getItem('cards1')
-    var currentCards2 = localStorage.getItem('cards2')
-    var currentCards3 = localStorage.getItem('cards3')
-
-    document.getElementById('to-do-column').innerHTML = currentCards1
-    document.getElementById('doing-column').innerHTML = currentCards2
-    document.getElementById('done-column').innerHTML = currentCards3
-
-    count = Number(currentCount)
-}
-
 
 //Set data
 
@@ -347,6 +320,28 @@ function populateStorage() {
     localStorage.setItem('cards2', document.getElementById('doing-column').innerHTML);
     localStorage.setItem('cards3', document.getElementById('done-column').innerHTML);
 
+    localStorage.setItem('bigCards', document.getElementById('big-div').innerHTML);
+
     localStorage.setItem('count', count)
     setStyles();
+}
+
+
+//Get saved data
+
+function setStyles() {
+    var currentCount = localStorage.getItem('count')
+    var currentCards1 = localStorage.getItem('cards1')
+    var currentCards2 = localStorage.getItem('cards2')
+    var currentCards3 = localStorage.getItem('cards3')
+    var currentBigCards = localStorage.getItem('bigCards')
+
+    document.getElementById('to-do-column').innerHTML = currentCards1
+    document.getElementById('doing-column').innerHTML = currentCards2
+    document.getElementById('done-column').innerHTML = currentCards3
+
+    document.getElementById('big-div').innerHTML = currentBigCards
+
+
+    count = Number(currentCount)
 }
