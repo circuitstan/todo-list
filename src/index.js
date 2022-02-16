@@ -11,8 +11,14 @@ var expandStatus = ""
 //Add new to-do
 
 
+//fix wrong connection between new expanded card and small card!!
+
+
 const newTodo = () => {
+    //small todo
     count += 1
+    console.log(count)
+
     let newTodoDiv = document.createElement('div')
     let title = document.createElement('p')
     let input1 = document.createElement('textarea')
@@ -55,12 +61,6 @@ const newTodo = () => {
     newTodoDiv.appendChild(buttons)
     plusTodo.appendChild(newTodoDiv)
 
-    let bigCard = document.createElement('div')
-    bigCard.className = "big-card"
-    bigCardDiv.appendChild(bigCard)
-    bigCard.id = count
-    bigCard.style.display = "none"
-
     input1.focus()
     input1.addEventListener("keypress", (e) => {
         if (e.key == "Enter") {
@@ -82,6 +82,17 @@ const newTodo = () => {
             newCardDiv.appendChild(done)
             column1.appendChild(newCardDiv)
             todoBtn.style.display = "block"
+
+            //expanded todo
+            let bigCard = document.createElement('div')
+            let bigCardTitle = document.createElement('p')
+            bigCard.className = "big-card"
+            console.log(count)
+            bigCard.id = count
+            bigCard.style.display = "none"
+            bigCardTitle.textContent = input1.value
+            bigCard.appendChild(bigCardTitle)
+            bigCardDiv.appendChild(bigCard)
 
             populateStorage()
         }
@@ -105,6 +116,16 @@ const newTodo = () => {
         newCardDiv.appendChild(done)
         column1.appendChild(newCardDiv)
         todoBtn.style.display = "block"
+
+        //expanded todo
+        let bigCard = document.createElement('div')
+        let bigCardTitle = document.createElement('p')
+        bigCard.className = "big-card"
+        bigCard.id = count
+        bigCard.style.display = "none"
+        bigCardTitle.textContent = input1.value
+        bigCard.appendChild(bigCardTitle)
+        bigCardDiv.appendChild(bigCard)
 
         populateStorage()
 
@@ -219,6 +240,7 @@ function openCard(e) {
         if (cards[i].id === e.target.id) {
             bigCards[i].style.display = "block"
             expandStatus = "open"
+            populateStorage()
         }
     }
 }
@@ -231,7 +253,7 @@ function closeCard() {
     for (let i = 0; i < bigCards.length; i++) {
         bigCards[i].style.display = "none"
         expandStatus = "closed"
-        
+        populateStorage()
     }
 }
 
