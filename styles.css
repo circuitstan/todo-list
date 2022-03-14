@@ -22,6 +22,15 @@ body {
 
 }
 
+#clear-data-btn {
+  height: 30px;
+  width: 30px;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+
+}
+
 
 .big-div {
   display: flex;
@@ -36,6 +45,7 @@ body {
   background-color: rgb(240, 240, 240);
   border: 2px solid pink;
   position: absolute;
+  right: 35%;
   top: 50px;
   border: 2px solid rgba(108, 194, 255, 0.76);
   border-radius: 8px;
@@ -106,6 +116,10 @@ body {
   outline: none;
   font-size: 16px;
   font-family: 'Courier New', Courier, monospace;
+}
+
+.card:hover {
+  cursor: pointer;
 }
 
 .card:focus {
