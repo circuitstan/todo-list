@@ -83,7 +83,7 @@ body {
 }
 
 .enter-and-cancel {
-  margin-top: 2px;
+  margin-top: 15px;
   font-size: 10px;
 }
 
@@ -132,7 +132,7 @@ body {
   font-family: 'Courier New', Courier, monospace;
   font-size: 15px;
   margin-left: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 2px;
   width: 200px;
   border: 2px solid rgba(108, 194, 255, 0.76);
   border-radius: 4px;
@@ -202,6 +202,10 @@ body {
   margin-left: 20px;
   font-size: 16px;
 
+}
+
+.input-false {
+  border: 2px solid rgba(255, 15, 55, 0.76);
 }
 
 #newtodobtn {

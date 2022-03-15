@@ -21,6 +21,8 @@ const newTodo = () => {
     let input2 = document.createElement('textarea')
     let date = document.createElement('p')
     let dateInput = document.createElement('input')
+    let time = document.createElement('p')
+    let timeInput = document.createElement('input')
     let buttons = document.createElement('div')
     let enter = document.createElement('input')
     let cancel = document.createElement('input')
@@ -28,13 +30,18 @@ const newTodo = () => {
     buttons.className = "enter-and-cancel"
     enter.className = "enter"
     input1.className = "input1"
+    input1.required = "true"
     input2.className = "input2"
     cancel.className = "cancel"
     title.className = "todo-title"
     info.className = "todo-title"
     date.className = "todo-title"
+    time.className = "todo-title"
     dateInput.className = "date"
     dateInput.type = "date"
+    timeInput.className = "date"
+    timeInput.type = "time"
+    timeInput.value = "12:00"
     input1.type = "text"
     input2.type = "text"
     enter.type = "submit"
@@ -44,6 +51,7 @@ const newTodo = () => {
     title.textContent = "Title"
     info.textContent = "Description"
     date.textContent = "Due date"
+    time.textContent = "Due time"
     input2.placeholder = "Add more details.."
     buttons.appendChild(enter)
     buttons.appendChild(cancel)
@@ -53,12 +61,18 @@ const newTodo = () => {
     newTodoDiv.appendChild(input2)
     newTodoDiv.appendChild(date)
     newTodoDiv.appendChild(dateInput)
+    newTodoDiv.appendChild(time)
+    newTodoDiv.appendChild(timeInput)
     newTodoDiv.appendChild(buttons)
     plusTodo.appendChild(newTodoDiv)
 
     input1.focus()
-    input1.addEventListener("keypress", (e) => {
+    newTodoDiv.addEventListener("keypress", (e) => {
         if (e.key == "Enter") {
+            if (input1.value == "") {
+                input1.className = "input1 input-false"
+                return
+            }
             plusTodo.removeChild(newTodoDiv)
             let newCardDiv = document.createElement('div')
             let card = document.createElement('p')
@@ -83,7 +97,9 @@ const newTodo = () => {
             let bigCardTitle = document.createElement('p')
             let bigCardText = document.createElement('p')
             let bigCardDate = document.createElement('input')
+            let bigCardTime = document.createElement('input')
             bigCardDate.type = "date"
+            bigCardTime.type = "time"
             bigCard.className = "big-card"
             console.log(count)
             bigCard.id = count
@@ -91,12 +107,19 @@ const newTodo = () => {
             bigCardTitle.textContent = input1.value
             bigCardText.textContent = input2.value
             bigCard.appendChild(bigCardTitle)
+            bigCard.appendChild(bigCardText)
+            bigCard.appendChild(bigCardDate)
+            bigCard.appendChild(bigCardTime)
             column1.appendChild(bigCard)
 
             populateStorage()
         }
     })
     enter.onclick = () => {
+        if (input1.value == "") {
+            input1.className = "input1 input-false"
+            return
+        }
         plusTodo.removeChild(newTodoDiv)
         let newCardDiv = document.createElement('div')
         let card = document.createElement('p')
@@ -121,7 +144,9 @@ const newTodo = () => {
         let bigCardTitle = document.createElement('p')
         let bigCardText = document.createElement('p')
         let bigCardDate = document.createElement('input')
+        let bigCardTime = document.createElement('input')
         bigCardDate.type = "date"
+        bigCardTime.type = "time"
         bigCard.className = "big-card"
         console.log(count)
         bigCard.id = count
@@ -131,6 +156,7 @@ const newTodo = () => {
         bigCard.appendChild(bigCardTitle)
         bigCard.appendChild(bigCardText)
         bigCard.appendChild(bigCardDate)
+        bigCard.appendChild(bigCardTime)
         column1.appendChild(bigCard)
 
 
@@ -256,6 +282,7 @@ function openCard(e) {
         if (cards[i].id === e.target.id) {  
             bigCards[i].style.display = "block"
             expandStatus = "open"
+            console.log(expandStatus)
             populateStorage()
         }
     }
@@ -269,6 +296,7 @@ function closeCard() {
     for (let i = 0; i < bigCards.length; i++) {
         bigCards[i].style.display = "none"
         expandStatus = "closed"
+        console.log(expandStatus)
         populateStorage()
     }
 }
@@ -276,12 +304,21 @@ function closeCard() {
 
 document.addEventListener("click", (e) => {
     console.log(e)
-    if (e.target.className != "big-card") {
-        closeCard()
+    if (expandStatus == "open") {
+        if ((e.target.className != "big-card") && (e.target.parentNode.className != "big-card")) {
+            console.log(e.target.parentNode.className)
+            closeCard()
+            return
+        }
+    } else {
+        if ((e.target.className == "card") || (e.target.className == "card in-progress") || (e.target.className == "card done-todo")) {
+            openCard(e)
+        }
     }
-    if ((e.target.className == "card") || (e.target.className == "card in-progress") || (e.target.className == "card done-todo")) {
-        openCard(e)
-    }
+
+
+
+
 })
 
 
