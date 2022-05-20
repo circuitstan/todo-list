@@ -209,7 +209,7 @@ function moveTodo1(e) {
         if (doneButtons[i].id === e.target.id) {
             if (doneButtons[i].textContent == ">") {
                 cards[i].className = "card in-progress"
-                doneButtons[i].textContent = "🗸"
+                doneButtons[i].textContent = "✓"
                 column2.appendChild(div[i])
                 column2.appendChild(bigDiv[i])
             }
@@ -226,7 +226,7 @@ function moveTodo2(e) {
 
     for (let i = 0; i < doneButtons.length; i++) {
         if (doneButtons[i].id === e.target.id) {
-            if (doneButtons[i].textContent == "🗸") {
+            if (doneButtons[i].textContent == "✓") {
                 cards[i].className = "card done-todo"
                 doneButtons[i].textContent = "x"
                 column3.appendChild(div[i])
@@ -376,7 +376,7 @@ else {
 const clearLocalStorage = document.createElement('button')
 container.appendChild(clearLocalStorage)
 clearLocalStorage.id = "clear-data-btn"
-clearLocalStorage.textContent = "⭯"
+clearLocalStorage.textContent = "⟳"
 
 document.addEventListener("click", (e) => {
     if (e.target.id === "clear-data-btn") {
